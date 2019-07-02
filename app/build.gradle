@@ -46,10 +46,12 @@ android {
 }
 
 dependencies {
-    implementation deps.kotlin.stdlib
+    implementation project(':common')
+
     implementation deps.androidX.appCompat
     implementation deps.androidX.core.ktx
     implementation deps.androidX.constraintLayout
+
     testImplementation deps.androidX.test.jUnit.ktx
     androidTestImplementation deps.androidX.test.runner
     androidTestImplementation deps.androidX.test.espresso.core
