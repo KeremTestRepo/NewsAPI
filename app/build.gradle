@@ -13,7 +13,7 @@ def versionStage = "alpha"
 android {
     compileSdkVersion versions.compileSdk
     defaultConfig {
-        applicationId 'com.example.newsapi'
+        applicationId 'com.necatisozer.newsapi'
         minSdkVersion versions.minSdk
         targetSdkVersion versions.targetSdk
         versionCode versionMajor * 1000000 + versionMinor * 10000 + versionPatch * 100 + versionBuild
