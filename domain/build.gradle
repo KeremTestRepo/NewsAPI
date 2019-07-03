@@ -15,12 +15,7 @@ android {
 }
 
 dependencies {
-    api deps.google.dagger.dagger
-    api deps.kotlin.stdlib
-    api deps.kotlin.coroutines.core
-    api deps.splitties.collections
-    api deps.threetenAbp
-    api deps.timber
+    implementation project(':common')
 
     testImplementation deps.androidX.test.jUnit.ktx
 }
