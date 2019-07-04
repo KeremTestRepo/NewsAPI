@@ -1,6 +1,7 @@
 package com.necatisozer.newsapi.extension
 
 import android.os.SystemClock
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.*
@@ -25,4 +26,14 @@ fun View.onSingleClick(debounceTime: Long = 2000L, action: () -> Unit) {
         if (SystemClock.elapsedRealtime() - lastClickTime >= debounceTime) action()
         lastClickTime = SystemClock.elapsedRealtime()
     }
+}
+
+fun View.addRipple() = with(TypedValue()) {
+    context.theme.resolveAttribute(android.R.attr.selectableItemBackground, this, true)
+    setBackgroundResource(resourceId)
+}
+
+fun View.addCircleRipple() = with(TypedValue()) {
+    context.theme.resolveAttribute(android.R.attr.selectableItemBackgroundBorderless, this, true)
+    setBackgroundResource(resourceId)
 }

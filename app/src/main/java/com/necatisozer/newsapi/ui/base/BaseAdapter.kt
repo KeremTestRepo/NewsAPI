@@ -5,6 +5,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.necatisozer.newsapi.extension.addRipple
 
 abstract class BaseAdapter<D, H : BaseViewHolder<D, ViewDataBinding>> :
     ListAdapter<D, H>(DiffCallback<D>()) {
@@ -17,6 +18,7 @@ abstract class BaseAdapter<D, H : BaseViewHolder<D, ViewDataBinding>> :
         holder.apply {
             bindData(data)
             itemView.setOnClickListener { clickListener(data) }
+            itemView.addRipple()
         }
     }
 
