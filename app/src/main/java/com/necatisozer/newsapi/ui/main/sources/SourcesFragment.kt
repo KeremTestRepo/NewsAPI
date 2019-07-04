@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.necatisozer.domain.entity.Source
@@ -36,6 +38,8 @@ class SourcesFragment : BaseFragment() {
     }
 
     private fun initViews() {
+        binding.toolbar.toolbar.setupWithNavController(findNavController())
+
         binding.sourcesRecyclerView.apply {
             adapter = sourcesAdapter
             addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
