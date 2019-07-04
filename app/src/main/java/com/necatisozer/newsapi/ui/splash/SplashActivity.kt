@@ -1,12 +1,12 @@
 package com.necatisozer.newsapi.ui.splash
 
 import android.os.Bundle
+import androidx.lifecycle.Observer
 import com.necatisozer.newsapi.di.injector
 import com.necatisozer.newsapi.extension.viewModels
 import com.necatisozer.newsapi.ui.base.BaseActivity
 import com.necatisozer.newsapi.ui.main.MainActivity
 import splitties.activities.start
-import splitties.arch.lifecycle.observeNotNull
 import splitties.toast.toast
 
 class SplashActivity : BaseActivity() {
@@ -18,8 +18,8 @@ class SplashActivity : BaseActivity() {
     }
 
     private fun observeViewModels() {
-        observeNotNull(viewModel.mainEvent()) { openMain() }
-        observeNotNull(viewModel.errorEvent()) { toast(it) }
+        viewModel.mainEvent().observe(this, Observer { openMain() })
+        viewModel.errorEvent().observe(this, Observer { toast(it) })
     }
 
     private fun openMain() {

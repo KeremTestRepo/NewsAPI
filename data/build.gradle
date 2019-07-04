@@ -11,7 +11,7 @@ android {
         minSdkVersion versions.minSdk
         targetSdkVersion versions.targetSdk
         testInstrumentationRunner deps.androidX.test.instrumentationRunner
-        buildConfigField 'String', "NEWS_API_BASE_URL", "\"https://$newsApiHost/$newsApiVersion\""
+        buildConfigField 'String', "NEWS_API_BASE_URL", "\"https://$newsApiHost/$newsApiVersion/\""
         buildConfigField 'String', "NEWS_API_KEY", getLocalProperty("NEWS_API_KEY")
     }
     compileOptions {
