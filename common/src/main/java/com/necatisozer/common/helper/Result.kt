@@ -7,10 +7,6 @@
 
 package com.necatisozer.common.helper
 
-import kotlin.contracts.ExperimentalContracts
-import kotlin.contracts.InvocationKind
-import kotlin.contracts.contract
-
 /**
  * A discriminated union that encapsulates successful outcome with a value of type [T]
  * or a failure with an arbitrary [Throwable] exception.
@@ -171,12 +167,8 @@ public inline fun <T> Result<T>.getOrThrow(): T {
  *
  * This function is shorthand for `fold(onSuccess = { it }, onFailure = onFailure)` (see [fold]).
  */
-@ExperimentalContracts
 @SinceKotlin("1.3")
 public inline fun <R, T : R> Result<T>.getOrElse(onFailure: (exception: Throwable) -> R): R {
-    contract {
-        callsInPlace(onFailure, InvocationKind.AT_MOST_ONCE)
-    }
     return when (val exception = exceptionOrNull()) {
         null -> value as T
         else -> onFailure(exception)
@@ -201,16 +193,11 @@ public inline fun <R, T : R> Result<T>.getOrDefault(defaultValue: R): R {
  *
  * Note, that an exception thrown by [onSuccess] or by [onFailure] function is rethrown by this function.
  */
-@ExperimentalContracts
 @SinceKotlin("1.3")
 public inline fun <R, T> Result<T>.fold(
     onSuccess: (value: T) -> R,
     onFailure: (exception: Throwable) -> R
 ): R {
-    contract {
-        callsInPlace(onSuccess, InvocationKind.AT_MOST_ONCE)
-        callsInPlace(onFailure, InvocationKind.AT_MOST_ONCE)
-    }
     return when (val exception = exceptionOrNull()) {
         null -> onSuccess(value as T)
         else -> onFailure(exception)
@@ -227,12 +214,8 @@ public inline fun <R, T> Result<T>.fold(
  * Note, that an exception thrown by [transform] function is rethrown by this function.
  * See [mapCatching] for an alternative that encapsulates exceptions.
  */
-@ExperimentalContracts
 @SinceKotlin("1.3")
 public inline fun <R, T> Result<T>.map(transform: (value: T) -> R): Result<R> {
-    contract {
-        callsInPlace(transform, InvocationKind.AT_MOST_ONCE)
-    }
     return when {
         isSuccess -> Result.success(transform(value as T))
         else -> Result(value)
@@ -263,12 +246,8 @@ public inline fun <R, T> Result<T>.mapCatching(transform: (value: T) -> R): Resu
  * Note, that an exception thrown by [transform] function is rethrown by this function.
  * See [recoverCatching] for an alternative that encapsulates exceptions.
  */
-@ExperimentalContracts
 @SinceKotlin("1.3")
 public inline fun <R, T : R> Result<T>.recover(transform: (exception: Throwable) -> R): Result<R> {
-    contract {
-        callsInPlace(transform, InvocationKind.AT_MOST_ONCE)
-    }
     return when (val exception = exceptionOrNull()) {
         null -> this
         else -> Result.success(transform(exception))
@@ -298,12 +277,8 @@ public inline fun <R, T : R> Result<T>.recoverCatching(transform: (exception: Th
  * Performs the given [action] on encapsulated exception if this instance represents [failure][Result.isFailure].
  * Returns the original `Result` unchanged.
  */
-@ExperimentalContracts
 @SinceKotlin("1.3")
 public inline fun <T> Result<T>.onFailure(action: (exception: Throwable) -> Unit): Result<T> {
-    contract {
-        callsInPlace(action, InvocationKind.AT_MOST_ONCE)
-    }
     exceptionOrNull()?.let { action(it) }
     return this
 }
@@ -312,12 +287,8 @@ public inline fun <T> Result<T>.onFailure(action: (exception: Throwable) -> Unit
  * Performs the given [action] on encapsulated value if this instance represents [success][Result.isSuccess].
  * Returns the original `Result` unchanged.
  */
-@ExperimentalContracts
 @SinceKotlin("1.3")
 public inline fun <T> Result<T>.onSuccess(action: (value: T) -> Unit): Result<T> {
-    contract {
-        callsInPlace(action, InvocationKind.AT_MOST_ONCE)
-    }
     if (isSuccess) action(value as T)
     return this
 }

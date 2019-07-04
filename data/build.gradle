@@ -1,0 +1,39 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+def newsApiHost = "newsapi.org"
+def newsApiVersion = "v2"
+
+android {
+    compileSdkVersion versions.compileSdk
+    defaultConfig {
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        testInstrumentationRunner deps.androidX.test.instrumentationRunner
+        buildConfigField 'String', "NEWS_API_BASE_URL", "\"https://$newsApiHost/$newsApiVersion\""
+        buildConfigField 'String', "NEWS_API_KEY", getLocalProperty("NEWS_API_KEY")
+    }
+    compileOptions {
+        sourceCompatibility '1.8'
+        targetCompatibility '1.8'
+    }
+}
+
+dependencies {
+    implementation project(':commonandroid')
+    implementation project(':domain')
+
+    implementation deps.moshiLazyAdapters
+    implementation deps.square.retrofit.retrofit
+    implementation deps.square.retrofit.moshiConverter
+    implementation deps.square.okHttp.loggingInterceptor
+    implementation deps.square.moshi.moshi
+    implementation deps.stetho.stetho
+    implementation deps.stetho.okhttp
+
+    kapt deps.google.dagger.compiler
+    kapt deps.square.moshi.codegen
+
+    testImplementation deps.androidX.test.jUnit.ktx
+}
