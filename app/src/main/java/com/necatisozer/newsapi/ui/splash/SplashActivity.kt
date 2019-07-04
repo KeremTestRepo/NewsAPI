@@ -1,22 +1,25 @@
 package com.necatisozer.newsapi.ui.splash
 
-import com.necatisozer.newsapi.R
+import android.os.Bundle
 import com.necatisozer.newsapi.di.injector
-import com.necatisozer.newsapi.extension.observe
 import com.necatisozer.newsapi.extension.viewModels
 import com.necatisozer.newsapi.ui.base.BaseActivity
 import com.necatisozer.newsapi.ui.main.MainActivity
 import splitties.activities.start
+import splitties.arch.lifecycle.observeNotNull
 import splitties.toast.toast
 
 class SplashActivity : BaseActivity() {
     private val viewModel by viewModels { injector.splashViewModel }
 
-    override fun initView() {}
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        observeViewModels()
+    }
 
-    override fun observeViewModels() {
-        viewModel.mainEvent().observe(this) { openMain() }
-        viewModel.errorEvent().observe(this) { toast(R.string.no_internet_connection) }
+    private fun observeViewModels() {
+        observeNotNull(viewModel.mainEvent()) { openMain() }
+        observeNotNull(viewModel.errorEvent()) { toast(it) }
     }
 
     private fun openMain() {

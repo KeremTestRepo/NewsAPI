@@ -48,6 +48,7 @@ android {
 dependencies {
     implementation project(':commonandroid')
     implementation project(':data')
+    implementation project(':domain')
 
     implementation deps.androidX.activity.ktx
     implementation deps.androidX.appCompat
@@ -74,6 +75,7 @@ dependencies {
     implementation deps.splitties.materialColors
     implementation deps.splitties.snackbar
     implementation deps.splitties.toast
+    implementation deps.splitties.arch.lifecycle
     implementation deps.splitties.views.views
     implementation deps.splitties.views.appCompat
 
