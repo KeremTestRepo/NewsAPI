@@ -36,4 +36,7 @@ dependencies {
     kapt deps.square.moshi.codegen
 
     testImplementation deps.androidX.test.jUnit.ktx
+    androidTestImplementation deps.androidX.test.core.ktx
+    androidTestImplementation deps.androidX.test.jUnit.ktx
+    androidTestImplementation deps.androidX.test.runner
 }
