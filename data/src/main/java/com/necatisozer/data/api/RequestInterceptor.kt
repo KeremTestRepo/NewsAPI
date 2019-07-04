@@ -1,4 +1,4 @@
-package com.subgen.network.api
+package com.necatisozer.data.api
 
 import com.necatisozer.data.BuildConfig
 import okhttp3.Interceptor

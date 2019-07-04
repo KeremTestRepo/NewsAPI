@@ -4,11 +4,11 @@ import android.content.Context
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.necatisozer.data.BuildConfig
 import com.necatisozer.data.api.NewsApi
+import com.necatisozer.data.api.RequestInterceptor
 import com.necatisozer.data.repository.NewsDataRepository
 import com.necatisozer.domain.repository.NewsRepository
 import com.serjltt.moshi.adapters.Wrapped
 import com.squareup.moshi.Moshi
-import com.subgen.network.api.RequestInterceptor
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
