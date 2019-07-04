@@ -46,14 +46,44 @@ android {
 }
 
 dependencies {
-    implementation project(':common')
     implementation project(':commonandroid')
+    implementation project(':data')
 
+    implementation deps.androidX.activity.ktx
     implementation deps.androidX.appCompat
-    implementation deps.androidX.core.ktx
+    implementation deps.androidX.cardView
+    implementation deps.androidX.collection.ktx
     implementation deps.androidX.constraintLayout
+    implementation deps.androidX.core.ktx
+    implementation deps.androidX.fragment.ktx
+    implementation deps.androidX.lifecycle.extensions
+    implementation deps.androidX.lifecycle.viewModelKtx
+    implementation deps.androidX.navigation.fragment
+    implementation deps.androidX.navigation.fragmentKtx
+    implementation deps.androidX.navigation.ui
+    implementation deps.androidX.navigation.uiKtx
+    implementation deps.androidX.recyclerView
+    implementation deps.glide.glide
+    implementation deps.google.material
+    implementation deps.kotlin.coroutines.android
+    implementation deps.splitties.activities
+    implementation deps.splitties.alertDialog
+    implementation deps.splitties.bundle
+    implementation deps.splitties.fragments
+    implementation deps.splitties.fragmentArgs
+    implementation deps.splitties.materialColors
+    implementation deps.splitties.snackbar
+    implementation deps.splitties.toast
+    implementation deps.splitties.views.views
+    implementation deps.splitties.views.appCompat
+
+    kapt deps.androidX.lifecycle.compiler
+    kapt deps.glide.compiler
+    kapt deps.google.dagger.compiler
 
     testImplementation deps.androidX.test.jUnit.ktx
+    androidTestImplementation deps.androidX.test.core.ktx
+    androidTestImplementation deps.androidX.test.jUnit.ktx
     androidTestImplementation deps.androidX.test.runner
     androidTestImplementation deps.androidX.test.espresso.core
 }
