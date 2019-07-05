@@ -83,6 +83,8 @@ dependencies {
     kapt deps.glide.compiler
     kapt deps.google.dagger.compiler
 
+    debugImplementation deps.stetho.stetho
+
     testImplementation deps.androidX.test.jUnit.ktx
     androidTestImplementation deps.androidX.test.core.ktx
     androidTestImplementation deps.androidX.test.jUnit.ktx

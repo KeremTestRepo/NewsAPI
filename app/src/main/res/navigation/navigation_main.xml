@@ -8,5 +8,22 @@
         android:id="@+id/sourcesFragment"
         android:name="com.necatisozer.newsapi.ui.main.sources.SourcesFragment"
         android:label="@string/title_sources"
-        tools:layout="@layout/fragment_sources" />
+        tools:layout="@layout/fragment_sources">
+        <action
+            android:id="@+id/action_sourcesFragment_to_articlesFragment"
+            app:destination="@id/articlesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/articlesFragment"
+        android:name="com.necatisozer.newsapi.ui.main.articles.ArticlesFragment"
+        android:label="@string/title_articles"
+        tools:layout="@layout/fragment_sources">
+        <argument
+            android:name="source_id"
+            app:argType="string" />
+        <argument
+            android:name="source_name"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
 </navigation>

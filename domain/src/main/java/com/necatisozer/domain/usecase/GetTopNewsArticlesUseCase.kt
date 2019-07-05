@@ -6,7 +6,12 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class GetTopNewsArticlesUseCase @Inject constructor(private val newsRepository: NewsRepository) {
-    suspend fun execute() = withContext(Dispatchers.Default) {
-        newsRepository.getTopArticles()
+    suspend fun execute(params: Params = Params()) = withContext(Dispatchers.Default) {
+        newsRepository.getTopArticles(params.sourceList, params.query)
     }
+
+    data class Params(
+        val sourceList: List<String>? = null,
+        val query: String? = null
+    )
 }

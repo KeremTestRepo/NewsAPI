@@ -19,8 +19,8 @@ internal class RequestInterceptor @Inject constructor() : Interceptor {
         val defaultLocale = Locale.getDefault()
 
         val httpUrl = request.url.newBuilder()
-            .addQueryParameter("country", defaultLocale.country)
-            .addQueryParameter("language", defaultLocale.language)
+            //.addQueryParameter("country", defaultLocale.country)
+            //.addQueryParameter("language", defaultLocale.language)
             .build()
 
         request = requestBuilder.url(httpUrl).build()

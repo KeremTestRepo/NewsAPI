@@ -1,9 +1,8 @@
 package com.necatisozer.data.mapper
 
+import com.necatisozer.common.extension.tryParseDate
 import com.necatisozer.data.api.entity.Article
 import com.necatisozer.data.api.entity.Source
-import org.threeten.bp.ZonedDateTime
-import org.threeten.bp.format.DateTimeFormatter
 import com.necatisozer.domain.entity.Article as ArticleEntity
 import com.necatisozer.domain.entity.Source as SourceEntity
 
@@ -20,7 +19,7 @@ fun Article.toArticleEntity() = ArticleEntity(
     description = description,
     url = url,
     imageUrl = urlToImage,
-    time = publishedAt?.let { ZonedDateTime.parse(it, DateTimeFormatter.ISO_INSTANT) }
+    time = tryParseDate(publishedAt)
 )
 
 fun List<Article>.toArticleEntity() = map { it.toArticleEntity() }

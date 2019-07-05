@@ -16,9 +16,9 @@ abstract class BaseViewModel : ViewModel() {
         if (throwable is CancellationException) return
 
         val errorMessage = when (throwable) {
-            is NetworkError -> R.string.no_internet_connection
-            is ServerError -> R.string.server_error
-            else -> R.string.unknown_error
+            is NetworkError -> R.string.error_no_internet_connection
+            is ServerError -> R.string.error_server
+            else -> R.string.error_unknown
         }
 
         errorEvent.postValue(errorMessage)

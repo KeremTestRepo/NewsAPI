@@ -1,15 +1,18 @@
-package com.necatisozer.newsapi.ui.main.sources
+package com.necatisozer.newsapi.ui.main.articles
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.necatisozer.domain.entity.Source
+import com.necatisozer.domain.entity.Article
 import com.necatisozer.newsapi.R
 import com.necatisozer.newsapi.databinding.FragmentSourcesBinding
 import com.necatisozer.newsapi.di.injector
@@ -18,13 +21,20 @@ import com.necatisozer.newsapi.ui.base.BaseFragment
 import splitties.arch.lifecycle.observeNotNull
 import splitties.toast.toast
 
-class SourcesFragment : BaseFragment() {
+
+class ArticlesFragment : BaseFragment() {
     private lateinit var binding: FragmentSourcesBinding
-    private val viewModel by viewModels { injector.sourcesViewModel }
-    private val sourcesAdapter: SourcesAdapter by lazy {
-        SourcesAdapter().apply {
-            clickListener = { onSourceClick(it) }
+    private val viewModel by viewModels { injector.articlesViewModel }
+    val args: ArticlesFragmentArgs by navArgs()
+    private val articlesAdapter: ArticlesAdapter by lazy {
+        ArticlesAdapter().apply {
+            clickListener = { onArticleClick(it) }
         }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (savedInstanceState == null) viewModel.init(args.sourceId)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -39,28 +49,30 @@ class SourcesFragment : BaseFragment() {
     }
 
     private fun initViews() {
-        binding.toolbar.toolbar.setupWithNavController(findNavController())
+        binding.toolbar.toolbar.apply {
+            setupWithNavController(findNavController())
+            title = args.sourceName
+        }
 
         binding.sourcesRecyclerView.apply {
-            adapter = sourcesAdapter
+            adapter = articlesAdapter
             addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
         }
     }
 
     private fun observeViewModels() {
-        viewLifecycleOwner.observeNotNull(viewModel.sourcesLiveData()) {
-            sourcesAdapter.submitList(it)
+        viewLifecycleOwner.observeNotNull(viewModel.articlesLiveData()) {
+            articlesAdapter.submitList(it)
+        }
+
+        viewLifecycleOwner.observeNotNull(viewModel.newArticlesEvent()) {
+            toast(R.string.alert_more_news)
         }
     }
 
-    private fun onSourceClick(source: Source) {
-        val sourceId = source.id
-
-        if (sourceId != null) {
-            val direction = SourcesFragmentDirections.actionSourcesFragmentToArticlesFragment(sourceId, source.name)
-            findNavController().navigate(direction)
-        } else {
-            toast("${getString(R.string.error_data)}: Source ID cannot be null")
-        }
+    private fun onArticleClick(data: Article) {
+        val uri = Uri.parse(data.url)
+        val intent = Intent(Intent.ACTION_VIEW, uri)
+        startActivity(intent)
     }
 }

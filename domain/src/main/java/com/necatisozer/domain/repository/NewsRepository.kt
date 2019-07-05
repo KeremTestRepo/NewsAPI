@@ -6,5 +6,9 @@ import com.necatisozer.domain.entity.Source
 
 interface NewsRepository {
     suspend fun getSources(): Result<List<Source>>
-    suspend fun getTopArticles(): Result<List<Article>>
+
+    suspend fun getTopArticles(
+        sourceList: List<String>? = null,
+        query: String? = null
+    ): Result<List<Article>>
 }
