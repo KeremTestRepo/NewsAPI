@@ -18,3 +18,11 @@ suspend inline fun <reified T> networkRequest(crossinline request: suspend () ->
     }
 }
 
+suspend inline fun <reified T> databaseOperation(crossinline request: suspend () -> T): Result<T> {
+    return try {
+        Result.success(request())
+    } catch (exception: Exception) {
+        Result.failure(exception)
+    }
+}
+

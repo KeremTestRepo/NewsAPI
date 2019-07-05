@@ -31,6 +31,15 @@
             app:layout_constraintTop_toBottomOf="@id/image"
             tools:text="1 dead, 2 injured from lightning strike" />
 
+        <com.google.android.material.chip.Chip
+            android:id="@+id/addToReadListChip"
+            style="@style/Widget.MaterialComponents.Chip.Filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title"
+            tools:text="Add to read list" />
+
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/time"
             style="@style/TextAppearance.MyTheme.Body1"

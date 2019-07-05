@@ -6,7 +6,9 @@ import androidx.lifecycle.viewModelScope
 import com.necatisozer.common.helper.onFailure
 import com.necatisozer.common.helper.onSuccess
 import com.necatisozer.domain.entity.Article
+import com.necatisozer.domain.usecase.AddArticleToReadListUseCase
 import com.necatisozer.domain.usecase.GetTopNewsArticlesUseCase
+import com.necatisozer.domain.usecase.RemoveArticleFromReadListUseCase
 import com.necatisozer.newsapi.helper.SingleLiveEvent
 import com.necatisozer.newsapi.ui.base.BaseViewModel
 import kotlinx.coroutines.Job
@@ -16,7 +18,9 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class ArticlesViewModel @Inject constructor(
-    private val getTopNewsArticlesUseCase: GetTopNewsArticlesUseCase
+    private val getTopNewsArticlesUseCase: GetTopNewsArticlesUseCase,
+    private val addArticleToReadListUseCase: AddArticleToReadListUseCase,
+    private val removeArticleFromReadListUseCase: RemoveArticleFromReadListUseCase
 ) : BaseViewModel() {
     private val articlesLiveData = MutableLiveData<List<Article>>()
     fun articlesLiveData(): LiveData<List<Article>> = articlesLiveData
@@ -54,6 +58,16 @@ class ArticlesViewModel @Inject constructor(
                 }.onFailure(::handleFailure)
 
                 delay(ARTICLES_REFRESH_TIME)
+            }
+        }
+    }
+
+    fun onReadListStatusChange(article: Article) {
+        viewModelScope.launch {
+            if (article.read) {
+                addArticleToReadListUseCase.execute(AddArticleToReadListUseCase.Params(article))
+            } else {
+                removeArticleFromReadListUseCase.execute(RemoveArticleFromReadListUseCase.Params(article))
             }
         }
     }

@@ -5,6 +5,8 @@ import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.necatisozer.data.BuildConfig
 import com.necatisozer.data.api.NewsApi
 import com.necatisozer.data.api.RequestInterceptor
+import com.necatisozer.data.db.NewsDb
+import com.necatisozer.data.db.paper.PaperDb
 import com.necatisozer.data.repository.NewsDataRepository
 import com.necatisozer.domain.repository.NewsRepository
 import com.serjltt.moshi.adapters.Wrapped
@@ -25,7 +27,10 @@ import javax.inject.Singleton
 @Module
 abstract class DataModule {
     @Binds
-    abstract fun bindNewsDataRepository(newsDataRepository: NewsDataRepository): NewsRepository
+    abstract fun bindNewsRepository(newsDataRepository: NewsDataRepository): NewsRepository
+
+    @Binds
+    abstract fun bindNewsDatabase(paperDb: PaperDb): NewsDb // TODO: Implement Room or Objectbox here
 
     @Module
     companion object {

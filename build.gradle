@@ -12,6 +12,7 @@ buildscript {
             ktlint             : '0.33.0',
             splitties          : '3.0.0-alpha06',
             moshiLazyAdapters  : '2.2',
+            paperDb            : '2.6',
             glide              : '4.9.0',
             threetenAbp        : '1.2.1',
             timber             : '4.7.1',
@@ -53,6 +54,7 @@ buildscript {
             androidGradlePlugin: "com.android.tools.build:gradle:$versions.androidGradlePlugin",
             ktlint             : "com.pinterest:ktlint:$versions.ktlint",
             moshiLazyAdapters  : "com.serjltt.moshi:moshi-lazy-adapters:$versions.moshiLazyAdapters",
+            paperDb            : "io.paperdb:paperdb:$versions.paperDb",
             threetenAbp        : "com.jakewharton.threetenabp:threetenabp:$versions.threetenAbp",
             timber             : "com.jakewharton.timber:timber:$versions.timber",
             kotlin             : [

@@ -10,4 +10,7 @@
     <string name="title_articles">Articles</string>
 
     <string name="alert_more_news">More news added</string>
+
+    <string name="button_unselected_add_to_read_list">Add to read list</string>
+    <string name="button_selected_add_to_read_list">Added to read list</string>
 </resources>

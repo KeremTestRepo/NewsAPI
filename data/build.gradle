@@ -32,6 +32,8 @@ dependencies {
     implementation deps.stetho.stetho
     implementation deps.stetho.okhttp
 
+    api deps.paperDb
+
     kapt deps.google.dagger.compiler
     kapt deps.square.moshi.codegen
 

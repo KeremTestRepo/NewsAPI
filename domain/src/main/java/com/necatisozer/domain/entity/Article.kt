@@ -7,5 +7,6 @@ data class Article(
     val description: String?,
     val url: String?,
     val imageUrl: String?,
-    val time: ZonedDateTime?
+    val time: ZonedDateTime?,
+    @Transient val read: Boolean = false
 )

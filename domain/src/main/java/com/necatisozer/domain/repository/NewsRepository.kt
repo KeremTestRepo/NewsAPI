@@ -11,4 +11,10 @@ interface NewsRepository {
         sourceList: List<String>? = null,
         query: String? = null
     ): Result<List<Article>>
+
+    suspend fun getReadList(): Result<List<Article>>
+
+    suspend fun addToReadList(article: Article): Result<Unit>
+
+    suspend fun removeFromReadList(article: Article): Result<Unit>
 }

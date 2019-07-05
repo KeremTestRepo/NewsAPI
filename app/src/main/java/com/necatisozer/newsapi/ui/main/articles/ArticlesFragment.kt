@@ -29,6 +29,7 @@ class ArticlesFragment : BaseFragment() {
     private val articlesAdapter: ArticlesAdapter by lazy {
         ArticlesAdapter().apply {
             clickListener = { onArticleClick(it) }
+            readListStatusChangeListener = { onReadListStatusChange(it) }
         }
     }
 
@@ -74,5 +75,9 @@ class ArticlesFragment : BaseFragment() {
         val uri = Uri.parse(data.url)
         val intent = Intent(Intent.ACTION_VIEW, uri)
         startActivity(intent)
+    }
+
+    private fun onReadListStatusChange(article: Article) {
+        viewModel.onReadListStatusChange(article)
     }
 }

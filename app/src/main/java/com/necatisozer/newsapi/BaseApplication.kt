@@ -6,6 +6,7 @@ import com.necatisozer.common.extension.unsyncLazy
 import com.necatisozer.newsapi.di.ApplicationComponent
 import com.necatisozer.newsapi.di.DaggerApplicationComponent
 import com.necatisozer.newsapi.di.DaggerComponentProvider
+import io.paperdb.Paper
 
 class BaseApplication : Application(), DaggerComponentProvider {
     override val component: ApplicationComponent by unsyncLazy {
@@ -15,5 +16,6 @@ class BaseApplication : Application(), DaggerComponentProvider {
     override fun onCreate() {
         super.onCreate()
         AndroidThreeTen.init(this)
+        Paper.init(this)
     }
 }
